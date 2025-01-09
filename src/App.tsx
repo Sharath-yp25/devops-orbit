@@ -14,7 +14,8 @@ import {
   Mail,
   Phone,
 } from "lucide-react";
-
+import emailjs from 'emailjs-com';
+import { toast } from 'react-toastify';
 function App() {
   const { toast } = useToast();
 
@@ -41,13 +42,54 @@ function App() {
     document.body.removeChild(link);
   }
 
+  // const handleContactSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   toast({
+  //     title: "Message Sent",
+  //     description: "We'll get back to you soon!",
+  //   });
+  // };
+
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Message Sent",
-      description: "We'll get back to you soon!",
-    });
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    const name = formData.get("name") as string;
+    const email = formData.get("email") as string;
+    const subject = formData.get("subject") as string;
+    const message = formData.get("message") as string;
+
+    // EmailJS service configuration
+    const serviceID = 'service_3wndbc6';  // Ensure this matches your actual service ID
+    const templateID = 'template_3ozt89r';  // Ensure this matches your actual template ID
+    const publicKey = '4QKHTC_dZR0eu0rLT';  // Ensure this matches your actual public key
+
+    const emailData = {
+      from_name: name,
+      from_email: email,
+      subject: subject,
+      message: message,
+    };
+
+    // Initialize EmailJS with your public key (you should only call this once in your app)
+    emailjs.init(publicKey);
+
+    // Debugging: Log the emailData to ensure it's captured properly
+    console.log("Email Data: ", emailData);
+
+    // Send email using EmailJS
+    emailjs.send(serviceID, templateID, emailData)
+      .then((response) => {
+        console.log("Email sent successfully: ", response);
+        toast.success("Your message has been sent successfully!");
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+        toast.error("There was an issue sending your message. Please try again.");
+      });
   };
+
 
   return (
     <div className="dark min-h-screen bg-background text-foreground">
@@ -187,45 +229,68 @@ function App() {
           <h2 className="text-4xl font-bold text-center mb-16">What Our Students Say</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              "https://drive.google.com/drive/folders/1jRrDZh9ivg0gPzEYTckSngoHigrwuZiq/preview",
-              "https://drive.google.com/file/d/FILE_ID2/preview",
-              "https://drive.google.com/file/d/FILE_ID3/preview",
-            ].map((videoUrl, index) => (
-              <Card key={index} className="aspect-video bg-muted flex items-center justify-center">
-                <iframe
-                  src={videoUrl}
-                  width="100%"
-                  height="100%"
-                  allow="autoplay"
-                  frameBorder="0"
-                  className="rounded-lg"
-                  title={`Testimonial ${index + 1}`}
-                ></iframe>
+              { url: "https://drive.google.com/file/d/18Ffd0o9itc8Gt0C2bAu_zPeT2OrbjaCW/preview", name: "Shreya" },
+              { url: "https://drive.google.com/file/d/1cU81wwA3s_eAPKFLLc8FdBvRdHSE0OQc/preview", name: "Shubham" },
+              { url: "https://drive.google.com/file/d/1XEZUZi4WvKhcalpBB4pQ6yaH0L5gsSZ0/preview", name: "Vijayaragavan" },
+            ].map((video, index) => (
+              <Card key={index} className="bg-muted flex flex-col items-center justify-center overflow-hidden">
+                <div
+                  className="relative w-full max-w-xs" // Width remains unchanged
+                  style={{ height: "500px" /* Reduced height */, overflow: "hidden" }}
+                >
+                  <iframe
+                    src={video.url}
+                    className="absolute top-0 left-0 w-full h-full rounded-lg"
+                    allow="autoplay"
+                    frameBorder="0"
+                    title={`Testimonial ${index + 1}`}
+                  ></iframe>
+                </div>
+                <p className="mt-4 text-lg font-medium text-center">{video.name}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
+
+
+
       {/* Contact Section */}
       <section className="py-20 bg-muted/50">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">Contact Us</h2>
           <div className="grid md:grid-cols-2 gap-12">
+            {/* Contact Info */}
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <Phone className="h-5 w-5 text-primary" />
-                <p>Your Contact Number</p>
+                <a href="+917024180805" className="hover:underline text-muted-foreground">
+                  +917024180805
+                </a>
               </div>
               <div className="flex items-center gap-4">
                 <Instagram className="h-5 w-5 text-primary" />
-                <p>Your Instagram Handle</p>
+                <a
+                  href="https://www.instagram.com/devops_orbit?igsh=MXBjOHQ4azZlN2o1eA=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline text-muted-foreground"
+                >
+                  @devops_orbit
+                </a>
               </div>
               <div className="flex items-center gap-4">
                 <Mail className="h-5 w-5 text-primary" />
-                <p>Your Email Address</p>
+                <a
+                  href="sharathyp25+doorbit@gmail.com"
+                  className="hover:underline text-muted-foreground"
+                >
+                  sharathyp25+doorbit@gmail.com
+                </a>
               </div>
             </div>
+            {/* Contact Form */}
             <form onSubmit={handleContactSubmit} className="space-y-4">
               <Input placeholder="Your Name" required />
               <Input type="email" placeholder="Your Email" required />
