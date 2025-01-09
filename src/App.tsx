@@ -23,12 +23,23 @@ function App() {
     element?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleDownloadSyllabus = () => {
-    toast({
-      title: "Coming Soon",
-      description: "The syllabus will be available for download shortly.",
-    });
-  };
+  // const handleDownloadSyllabus = () => {
+  //   toast({
+  //     title: "Coming Soon",
+  //     description: "The syllabus will be available for download shortly.",
+  //   });
+  // };
+
+  function handleDownloadSyllabus() {
+    // Path to the syllabus file
+    const syllabusUrl = "/assets/syllabus.pdf"; // Adjust the path if needed
+    const link = document.createElement("a");
+    link.href = syllabusUrl;
+    link.download = "syllabus.pdf"; // Set the download filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +74,7 @@ function App() {
           <h2 className="text-4xl font-bold text-center mb-16">Meet Your Trainer</h2>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="aspect-square bg-muted rounded-lg overflow-hidden">
-              <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070')] bg-cover bg-center" />
+              <div className="w-full h-full bg-[url('/assets/Sharathc.jpeg')] bg-cover bg-center" />
             </div>
             <div>
               <h3 className="text-2xl font-bold mb-4">Sharath Y P</h3>
@@ -156,7 +167,7 @@ function App() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section
       <section className="py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-16">What Our Students Say</h2>
@@ -164,6 +175,32 @@ function App() {
             {[1, 2, 3].map((index) => (
               <Card key={index} className="aspect-video bg-muted flex items-center justify-center">
                 <p className="text-muted-foreground">Video Testimonial {index}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section> */}
+
+      {/* Testimonials Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16">What Our Students Say</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              "https://drive.google.com/drive/folders/1jRrDZh9ivg0gPzEYTckSngoHigrwuZiq/preview",
+              "https://drive.google.com/file/d/FILE_ID2/preview",
+              "https://drive.google.com/file/d/FILE_ID3/preview",
+            ].map((videoUrl, index) => (
+              <Card key={index} className="aspect-video bg-muted flex items-center justify-center">
+                <iframe
+                  src={videoUrl}
+                  width="100%"
+                  height="100%"
+                  allow="autoplay"
+                  frameBorder="0"
+                  className="rounded-lg"
+                  title={`Testimonial ${index + 1}`}
+                ></iframe>
               </Card>
             ))}
           </div>
