@@ -80,18 +80,18 @@ function App() {
     emailjs.send(serviceID, templateID, emailData)
       .then((response) => {
         console.log("Email sent successfully: ", response);
-        
+
       })
       .catch((error) => {
         console.error("Error sending email:", error);
-        
+
       });
   };
 
 
   return (
     <div className="dark min-h-screen bg-background text-foreground">
-      {/* Hero Section */}
+      {/* Hero Section
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072')] bg-cover bg-center opacity-70" />
@@ -106,7 +106,61 @@ function App() {
             Enroll Now
           </Button>
         </div>
+      </section> */}
+
+      {/* Hero Section
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 z-0" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072')] bg-cover bg-center opacity-70" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          Logo
+          <div className="mb-4">
+            <img
+              src="/public/assets/doologo.png" // Replace with the correct path to your logo
+              alt="DevOps Orbit Logo"
+              className="mx-auto h-16 w-auto" // Adjust the size (h-12 for height, w-auto for width)
+            />
+          </div>
+
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+            DevOps Orbit
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl mx-auto">
+            Empowering Excellence in Automation, Collaboration, and Deployment
+          </p>
+          <Button size="lg" onClick={handleEnrollScroll}>
+            Enroll Now
+          </Button>
+        </div>
+      </section> */}
+
+
+      Hero Section
+      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 z-0" />
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072')] bg-cover bg-center opacity-70" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+            DevOps
+            <span className="inline-block w-14 h-14 ml-4">
+              <img
+                src="/public/assets/doologo.png" // Replace with your actual logo path
+                alt="Logo"
+                className="object-contain w-full h-full"
+              />
+            </span>rbit
+          </h1>
+          <p className="text-xl md:text-2xl mb-8 text-muted-foreground max-w-2xl mx-auto">
+            Empowering Excellence in Automation, Collaboration, and Deployment
+          </p>
+          <Button size="lg" onClick={handleEnrollScroll}>
+            Enroll Now
+          </Button>
+        </div>
       </section>
+
+
+
 
       {/* Trainer Info Section */}
       <section className="py-20 bg-muted/50">
