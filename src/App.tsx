@@ -135,7 +135,7 @@ function App() {
       </section> */}
 
 
-      Hero Section
+      {/* Hero Section */}
       <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 z-0" />
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072')] bg-cover bg-center opacity-70" />
@@ -144,7 +144,7 @@ function App() {
             DevOps
             <span className="inline-block w-14 h-14 ml-4">
               <img
-                src="/public/assets/doologo.png" // Replace with your actual logo path
+                src="/assets/doologo.png" // Replace with your actual logo path
                 alt="Logo"
                 className="object-contain w-full h-full"
               />
