@@ -1,9 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { useToast } from "@/hooks/use-toast";
 import {
   Download,
   GraduationCap,
@@ -15,9 +14,8 @@ import {
   Phone,
 } from "lucide-react";
 import emailjs from 'emailjs-com';
-import { toast } from 'react-toastify';
+
 function App() {
-  const { toast } = useToast();
 
   const handleEnrollScroll = () => {
     const element = document.getElementById('course-details');
@@ -82,11 +80,11 @@ function App() {
     emailjs.send(serviceID, templateID, emailData)
       .then((response) => {
         console.log("Email sent successfully: ", response);
-        toast.success("Your message has been sent successfully!");
+        
       })
       .catch((error) => {
         console.error("Error sending email:", error);
-        toast.error("There was an issue sending your message. Please try again.");
+        
       });
   };
 
